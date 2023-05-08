@@ -170,6 +170,28 @@ socket.onmessage = function(e) {
 
   /* ---------- Se asignan los Min y Max, y se insertan en index.html en la grilla Estadisticas---------- */
   var ultimaFila = info[info.length - 1];
+  const statSection = document.querySelector("#statistics-section");
+
+  for (let i = 2; i < labels.fields.length; i++) {
+    const row = document.createElement('div');
+    row.classList.add('row');
+    for (let j = 0; j < 3; j++) {
+      const col = document.createElement('div');
+      col.classList.add('col-xs-4');
+      const box = document.createElement('div');
+      if (j === 0) {
+        box.classList.add('box', 'text-left');
+        box.textContent = labels.fields[i];
+      } else {
+        box.classList.add('box2');
+        box.setAttribute('id', labels.fields[i] + '-' + (j === 1 ? 'Min' : 'Max'));
+       
+      }
+      col.appendChild(box);
+      row.appendChild(col);
+    }
+    statSection.appendChild(row);
+  }
 
   if (flag==0) {
     for (let i = 2; i < newData.length; i++) {
