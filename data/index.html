@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/flexboxgrid.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/stylefonts.css">
+
+    <title>Grid</title>
+</head>
+<body onload="hideGauge();">
+    <div class="titles">
+        <h1>Tesis Claudio Gereniere</h1>
+    </div>
+    <div class="titles">
+        <h1>Lectura y Registro de Datos</h1>
+    </div>
+    
+    <main>
+        <div class="titles">
+            <h2>Tablero de Datos</h2>
+        </div>
+        <section id="data_section">
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="box"></div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box">R</div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box">S</div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box">T</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="box text-left">VRms</div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box2" id="VRms_R"></div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box2" id="VRms_S"></div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box2" id="VRms_T"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="box text-left">IRms</div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box2" id="IRms_R"></div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box2" id="IRms_S"></div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box2" id="IRms_T"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="box text-left">PRms</div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box2" id="PRms_R"></div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box2" id="PRms_S"></div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box2" id="PRms_T"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="box text-left">Energia</div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box2" id="Energia_R"></div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box2" id="Energia_S"></div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box2" id="Energia_T"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="box text-left">Energia Total</div>
+                </div>
+                <div class="col-xs-9">
+                    <div class="box2" id="Energia_Total"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="box text-left">Factor de Potencia</div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box2" id="FP_R"></div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box2" id="FP_S"></div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box2" id="FP_T"></div>
+                </div>
+            </div>
+        </section>
+        <section id="date_section">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="box">Fecha</div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="box">Hora</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="box2" id="Fecha"></div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="box2" id="Hora"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Estadisticas -->
+    <main>
+        <div class="titles">
+            <h2>Estadisticas</h2>
+        </div>
+        <section id="statistics-section">
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="box"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box">Min</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box">Max</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="box text-left">Vmrs-R</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="VRms-R-Min"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="VRms-R-Max"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="box text-left">VRms-S</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="VRms-S-Min"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="VRms-S-Max"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="box text-left">VRms-T</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="VRms-T-Min"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="VRms-T-Max"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="box text-left">IRms-R</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="IRms-R-Min"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="IRms-R-Max"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="box text-left">IRms-S</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="IRms-S-Min"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="IRms-S-Max"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="box text-left">IRms-T</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="IRms-T-Min"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="IRms-T-Max"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="box text-left">KW-R</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="KW-R-Min"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="KW-R-Max"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="box text-left">KW-S</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="KW-S-Min"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="KW-S-Max"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="box text-left">KW-T</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="KW-T-Min"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="KW-T-Max"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="box text-left">Energia-R</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="Energia-R-Min"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="Energia-R-Max"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="box text-left">Energia-S</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="Energia-S-Min"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="Energia-S-Max"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="box text-left">Energia-T</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="Energia-T-Min"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="Energia-T-Max"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="box text-left">Energ-Total</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="Energ-Total-Min"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="Energ-Total-Max"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="box text-left">Factor-Pot-R</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="Factor-Pot-R-Min"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="Factor-Pot-R-Max"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                   <div class="box text-left">Factor-Pot-S</div>
+               </div>
+               <div class="col-xs-4">
+                   <div class="box2" id="Factor-Pot-S-Min"></div>
+               </div>
+               <div class="col-xs-4">
+                   <div class="box2" id="Factor-Pot-S-Max"></div>
+               </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="box text-left">Factor-Pot-T</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="Factor-Pot-T-Min"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="box2" id="Factor-Pot-T-Max"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <section class="row">
+        <div class="icons col-xs-6">
+            <a href="./pages/mainmenu.html" target="_self" rel="noopener noreferrer"><span class="icon-list2"></span></a>
+            <h3>Menú</h3>
+        </div>
+        <div class="icons col-xs-6">
+            <span id="action" class="icon-download3"></span>
+            <h3>.csv</h3>
+        </div>
+    </section>
+    <div class="col-xs-12 titles">
+        <h1>Multimetros</h1>
+    </div>
+    <section id="section-boxes">
+        <div class="row check-boxes">
+            <div class="col-xs-2 icons">
+                <input type="checkbox" name="check" id="gauge-vrms-chk" value="1" onchange="javascript:showContent()"><h3>VRms-R</h3>
+            </div>
+            <div class="col-xs-2 icons">
+                <input type="checkbox" name="check" id="gauge-irms-chk" value="1" onchange="javascript:showContent()"><h3>IRms-R</h3>
+            </div>
+            <div class="col-xs-2 icons">
+                <input type="checkbox" name="check" id="gauge-prms-chk" value="1" onchange="javascript:showContent()"><h3>PRms-R</h3>
+            </div>
+        </div>
+        <div class="row check-boxes">
+            <div class="col-xs-2 icons">
+                <input type="checkbox" name="check" id="gauge-energia-chk" value="1" onchange="javascript:showContent()"><h3>Energia</h3>
+            </div>
+            <div class="col-xs-2 icons">
+                <input type="checkbox" name="check" id="gauge-energiatotal-chk" value="1" onchange="javascript:showContent()"><h3>Energia Total</h3>
+            </div>
+            <div class="col-xs-2 icons">
+                <input type="checkbox" name="check" id="gauge-factordepotencia-chk" value="1" onchange="javascript:showContent()"><h3>Factor de Potencia</h3>
+            </div>
+        </div>
+    </section>
+    <section id="gauge-section">
+        <div class="gauges-div" id="gauge-vrms-r">
+            <h1>VRms-R</h1>
+            <div id="preview-vrms-r"></div>
+            <canvas id="vrms_R"></canvas>
+        </div>
+        <div class="gauges-div" id="gauge-vrms-s">
+            <h1>VRms-S</h1>
+            <div id="preview-vrms-s"></div>
+            <canvas id="vrms_S"></canvas>
+        </div>
+        <div class="gauges-div" id="gauge-vrms-t">
+            <h1>VRms-S</h1>
+            <div id="preview-vrms-t"></div>
+            <canvas id="vrms_T"></canvas>
+        </div>
+    </section>
+    <button id="btn1" onclick="playsound();" style="display: none;">
+        Click Me!
+    </button>
+    <script src="./apps/howler.js"></script>
+    <script src="./apps/gauge.js"></script>
+    <script src="./apps/options_gauges.js"></script>
+    <script src="./apps/app.js"></script>
+    <script type="text/javascript">
+
+        var element = document.getElementById("gauge-section");
+        var maxWidth700 = window.matchMedia("(max-width: 700px)");
+        
+        // Play Alarm
+        
+        
+        document.getElementById('VRms_R').addEventListener("DOMSubtreeModified", playVRmsR, true);
+        function playVRmsR(){
+            document.querySelector('#btn1').click();
+            if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)) {
+                var element = document.getElementById('btn1');
+                var touch = new Touch({
+                    identifier: Date.now(),
+                    target: element,
+                    clientX: 0,
+                    clientY: 0,
+                    radiusX: 2.5,
+                    radiusY: 2.5,
+                    rotationAngle: 10,
+                    force: 0.5
+                });
+
+                var touchEvent = new TouchEvent('touchstart', {
+                    cancelable: true,
+                    bubbles: true,
+                    touches: [touch],
+                    targetTouches: [touch],
+                    changedTouches: [touch],
+                    shiftKey: true
+                });
+
+                element.dispatchEvent(touchEvent);
+            }
+        }
+
+        var sound = new Howl({
+            mute: false,
+            src: ['./apps/emergency-alarm.wav'],
+            loop: true,
+            volume: 0.5,
+            });
+
+        function playsound() {
+            
+            if (vrms_r>230) {
+                sound.play();
+                
+            }
+            if (vrms_r<=230) {
+                sound.pause();
+            } 
+            
+        }
+
+        //Function for hide/show the selected gauge
+        function showContent() {
+            
+            check = document.getElementById("gauge-vrms-chk");
+            if (check.checked) {
+                if (maxWidth700.matches) {
+                    element.style.display='block';
+                } else {
+                    element.style.display='flex';
+                }
+            }
+            else {
+                element.style.display='none';
+            }
+        }
+        function hideGauge() {
+            element.style.display='none';
+        }
+        
+    </script>
+    <script src="./apps/papaparse.min.js"></script>
+    <script src="./apps/session_out.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../styles/flexboxgrid.css">
+        <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/stylefonts.css">
+        <link rel="shortcut icon" href="#">
+        <title>Menú Principal</title>
+    </head>
+    <body>
+        <div class="titles">
+            <h1 class="dcf-txt-center">Tesis Claudio Gereniere</h1>
+        </div>
+        <div class="titles2">
+            <h2>Menú Principal</h2>
+        </div>
+        <section id="data_section">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box2"><a href="/"><span class="icon-meter"></span></a><h3><a href="../">Tablero de Datos</a></h3></div>
+                </div>
+            </div>
+        </section>
+        <section class="section_cards container">
+            <div class="cards">
+                <div><h2><a href="/"><span class="icon-meter"></span></a></h2></div>
+                <div><h2><a href="/">Tablero de Datos</a></h2></div>
+                <div class="card_r"><a href="./settings.html"><span class="icon-cog"></span></a></div>
+                <div class="card_l"><h2><a href="./settings.html">Ajustes</a></h2></div>
+                <div class="card_r"><span class="icon-floppy-disk"></span></div>
+                <div class="card_l"><h2>Retirar Tarjeta SD</h2></div>
+                <div class="card_r"><span class="icon-connection"></span></div>
+                <div class="card_l"><h2>Conexión Wifi</h2></div>
+                <div class="card_r"><a onclick="logoutButton()"><span class="icon-exit"></span></a></div>
+                <div class="card_l"><h2><a onclick="logoutButton()">Cerrar Sesión</a></h2></div>
+            </div>
+        </section>
+        <script src="../apps/app2.js"></script>
+        <script src="../apps/session_out.js"></script>
+    </body>
+</html>

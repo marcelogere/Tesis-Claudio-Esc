@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        @charset "utf-8";
+        @import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+        [class*="fontawesome-"]:before {
+            font-family: 'FontAwesome', sans-serif;
+        }
+
+        body {
+            background: white;
+            color: white;
+            font: 87.5%/1.5em 'Open Sans', sans-serif;
+            margin: 0;
+        }
+
+        p {
+            line-height: 1.5em;
+        }
+
+        after { clear: both; }
+
+        .login {
+            margin: 50px auto;
+            width: 320px;
+        }
+
+        .login form {
+            margin: auto;
+            padding: 22px 22px 22px 22px;
+            width: 100%;
+            border-radius: 5px;
+            background: #282e33;
+            border-top: 3px solid #434a52;
+            border-bottom: 3px solid #434a52;
+        }
+
+        .login form span {
+            background-color: #363b41;
+            border-radius: 3px 0px 0px 3px;
+            border-right: 3px solid #434a52;
+            color: #606468;
+            display: block;
+            float: left;
+            line-height: 50px;
+            text-align: center;
+            width: 50px;
+            height: 50px;
+        }
+
+        .login form input[type="text"] {
+            background-color: #3b4148;
+            border-radius: 0px 3px 3px 0px;
+            color: #ffffff;
+            margin-bottom: 1em;
+            padding: 0 16px;
+            width: 90%;
+            height: 50px;
+        }
+
+        .login form input[type="password"] {
+            background-color: #3b4148;
+            border-radius: 0px 3px 3px 0px;
+            color: #ffffff;
+            margin-bottom: 1em;
+            padding: 0 16px;
+            width: 90%;
+            height: 50px;
+        }
+
+        .login form input[type="button"] {
+            background: linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+            background-color: #3d94f6;
+            border-radius: 6px;
+            border: 1px solid #337fed;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Arial;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 6px 24px;
+            text-decoration: none;
+        }
+        #login form input[type="button"]:hover {
+            background: #16aa56;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+    //checking
+    function check(){
+        
+        if (document.form.password.value=='290372' && document.form.login.value=='Claudio'){ 
+        location.href = "7q6w1e9z4x3c.html"; 
+        } 
+        else{ 
+            alert("Porfavor ingrese, nombre de usuario y contraseña correctos."); 
+        } 
+        }
+    </script>
+    <div class="login">
+        <form name='form'>
+    
+            <h1>Login</h1>
+    
+            <label for="userName">Usuario</label>
+            <input type="text" name=login id="userName" placeholder="Username" required>
+    
+            <label for="userPw">Password</label>
+            <input type="password" name=password id= "userPw" placeholder="Password" required>
+    
+            <input id= "login_btn" type="button" value="Login" onclick=check()>
+    
+        </form>
+    </div>
+</body>
+</html>
