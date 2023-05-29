@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="./styles/flexboxgrid.css">
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/stylefonts.css">
-
-    <title>Grid</title>
+    <link rel="shortcut icon" href="./media/gauge-icon.png" />
+    <title>Tesis Claudio Gereniere</title>
 </head>
-<body onload="hideGauge();">
+<body onload="hideSections();">
     <div class="titles">
         <h1>Tesis Claudio Gereniere</h1>
     </div>
@@ -22,10 +22,10 @@
         <div class="titles">
             <h2>Tablero de Datos</h2>
         </div>
-        <section id="data_section">
+        <section id="data_section" onload="alarm()">
             <div class="row">
                 <div class="col-xs-3">
-                    <div class="box"></div>
+                    <div class="box">Parámetros</div>
                 </div>
                 <div class="col-xs-3">
                     <div class="box">R</div>
@@ -35,84 +35,6 @@
                 </div>
                 <div class="col-xs-3">
                     <div class="box">T</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-3">
-                    <div class="box text-left">VRms</div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="box2" id="VRms_R"></div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="box2" id="VRms_S"></div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="box2" id="VRms_T"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-3">
-                    <div class="box text-left">IRms</div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="box2" id="IRms_R"></div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="box2" id="IRms_S"></div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="box2" id="IRms_T"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-3">
-                    <div class="box text-left">PRms</div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="box2" id="PRms_R"></div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="box2" id="PRms_S"></div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="box2" id="PRms_T"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-3">
-                    <div class="box text-left">Energia</div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="box2" id="Energia_R"></div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="box2" id="Energia_S"></div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="box2" id="Energia_T"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-3">
-                    <div class="box text-left">Energia Total</div>
-                </div>
-                <div class="col-xs-9">
-                    <div class="box2" id="Energia_Total"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-3">
-                    <div class="box text-left">Factor de Potencia</div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="box2" id="FP_R"></div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="box2" id="FP_S"></div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="box2" id="FP_T"></div>
                 </div>
             </div>
         </section>
@@ -140,10 +62,37 @@
         <div class="titles">
             <h2>Estadisticas</h2>
         </div>
-        <section id="statistics-section">
+        <section id="stat-boxes" class="section-boxes">
+            <div class="row check-boxes">
+                <div class="col-xs-2 icons">
+                    <input type="checkbox" id="VRms-stat-section-chk" value="1"><h3>VRms-R</h3>
+                </div>
+                <div class="col-xs-2 icons">
+                    <input type="checkbox" id="IRms-stat-section-chk" value="1"><h3>IRms-R</h3>
+                </div>
+                <div class="col-xs-2 icons">
+                    <input type="checkbox" id="KW-stat-section-chk" value="1"><h3>KW</h3>
+                </div>
+                <div class="col-xs-2 icons">
+                    <input type="checkbox" id="Factor de Potencia-stat-section-chk" value="1"><h3>Factor de Potencia</h3>
+                </div>
+            </div>
+            <div class="row check-boxes">
+                <div class="col-xs-2 icons">
+                    <input type="checkbox" id="Energia-stat-section-chk" value="1"><h3>Energía</h3>
+                </div>
+                <div class="col-xs-2 icons">
+                    <input type="checkbox" id="Energía Total-stat-section-chk" value="1"><h3>Energía Total</h3>
+                </div>
+                <div class="col-xs-2 icons">
+                    <input type="checkbox" id="stat-section-chk" value="1"><h3>Ver Todos/Ninguno</h3>
+                </div>
+            </div>
+        </section>
+        <section id="stat-section">
             <div class="row">
                 <div class="col-xs-4">
-                    <div class="box"></div>
+                    <div class="box">Parámetros</div>
                 </div>
                 <div class="col-xs-4">
                     <div class="box">Min</div>
@@ -164,133 +113,49 @@
             <h3>.csv</h3>
         </div>
     </section>
-    <div class="col-xs-12 titles">
-        <h1>Multimetros</h1>
-    </div>
-    <section id="section-boxes">
-        <div class="row check-boxes">
-            <div class="col-xs-2 icons">
-                <input type="checkbox" name="check" id="gauge-vrms-chk" value="1" onchange="javascript:showContent()"><h3>VRms-R</h3>
-            </div>
-            <div class="col-xs-2 icons">
-                <input type="checkbox" name="check" id="gauge-irms-chk" value="1" onchange="javascript:showContent()"><h3>IRms-R</h3>
-            </div>
-            <div class="col-xs-2 icons">
-                <input type="checkbox" name="check" id="gauge-prms-chk" value="1" onchange="javascript:showContent()"><h3>PRms-R</h3>
-            </div>
+    <main>
+        <div class="col-xs-12 titles">
+            <h2>Multimetros</h2>
         </div>
-        <div class="row check-boxes">
-            <div class="col-xs-2 icons">
-                <input type="checkbox" name="check" id="gauge-energia-chk" value="1" onchange="javascript:showContent()"><h3>Energia</h3>
+        <section id="gauge-boxes" class="section-boxes">
+            <div class="row check-boxes">
+                <div class="col-xs-2 icons">
+                    <input type="checkbox" id="VRms-gauge-section-chk" value="1"><h3>VRms-R</h3>
+                </div>
+                <div class="col-xs-2 icons">
+                    <input type="checkbox" id="IRms-gauge-section-chk" value="1"><h3>IRms-R</h3>
+                </div>
+                <div class="col-xs-2 icons">
+                    <input type="checkbox" id="KW-gauge-section-chk" value="1"><h3>KW</h3>
+                </div>
+                <div class="col-xs-2 icons">
+                    <input type="checkbox" id="Factor de Potencia-gauge-section-chk" value="1"><h3>Factor de Potencia</h3>
+                </div>
             </div>
-            <div class="col-xs-2 icons">
-                <input type="checkbox" name="check" id="gauge-energiatotal-chk" value="1" onchange="javascript:showContent()"><h3>Energia Total</h3>
+            <div class="row check-boxes">
+                <div class="col-xs-2 icons">
+                    <input type="checkbox" id="Energia-gauge-section-chk" value="1"><h3>Energía</h3>
+                </div>
+                <div class="col-xs-2 icons">
+                    <input type="checkbox" id="Energía Total-gauge-section-chk" value="1"><h3>Energía Total</h3>
+                </div>
+                <div class="col-xs-2 icons">
+                    <input type="checkbox" id="gauge-section-chk" value="1"><h3>Ver Todos/Ninguno</h3>
+                </div>
             </div>
-            <div class="col-xs-2 icons">
-                <input type="checkbox" name="check" id="gauge-factordepotencia-chk" value="1" onchange="javascript:showContent()"><h3>Factor de Potencia</h3>
-            </div>
-        </div>
-    </section>
-    <section id="gauge-section">
-        <div class="gauges-div" id="gauge-vrms-r">
-            <h1>VRms-R</h1>
-            <div id="preview-vrms-r"></div>
-            <canvas id="vrms_R"></canvas>
-        </div>
-        <div class="gauges-div" id="gauge-vrms-s">
-            <h1>VRms-S</h1>
-            <div id="preview-vrms-s"></div>
-            <canvas id="vrms_S"></canvas>
-        </div>
-        <div class="gauges-div" id="gauge-vrms-t">
-            <h1>VRms-S</h1>
-            <div id="preview-vrms-t"></div>
-            <canvas id="vrms_T"></canvas>
-        </div>
-    </section>
+        </section>
+        <section id="gauge-section" class="gauge-section">
+        </section>
+    </main>
     <button id="btn1" onclick="playsound();" style="display: none;">
         Click Me!
     </button>
-    <script src="./apps/howler.js"></script>
-    <script src="./apps/gauge.js"></script>
-    <script src="./apps/options_gauges.js"></script>
-    <script src="./apps/app.js"></script>
-    <script type="text/javascript">
-
-        var element = document.getElementById("gauge-section");
-        var maxWidth700 = window.matchMedia("(max-width: 700px)");
-        
-        // Play Alarm
-        
-        
-        document.getElementById('VRms_R').addEventListener("DOMSubtreeModified", playVRmsR, true);
-        function playVRmsR(){
-            document.querySelector('#btn1').click();
-            if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)) {
-                var element = document.getElementById('btn1');
-                var touch = new Touch({
-                    identifier: Date.now(),
-                    target: element,
-                    clientX: 0,
-                    clientY: 0,
-                    radiusX: 2.5,
-                    radiusY: 2.5,
-                    rotationAngle: 10,
-                    force: 0.5
-                });
-
-                var touchEvent = new TouchEvent('touchstart', {
-                    cancelable: true,
-                    bubbles: true,
-                    touches: [touch],
-                    targetTouches: [touch],
-                    changedTouches: [touch],
-                    shiftKey: true
-                });
-
-                element.dispatchEvent(touchEvent);
-            }
-        }
-
-        var sound = new Howl({
-            mute: false,
-            src: ['./apps/emergency-alarm.wav'],
-            loop: true,
-            volume: 0.5,
-            });
-
-        function playsound() {
-            
-            if (vrms_r>230) {
-                sound.play();
-                
-            }
-            if (vrms_r<=230) {
-                sound.pause();
-            } 
-            
-        }
-
-        //Function for hide/show the selected gauge
-        function showContent() {
-            
-            check = document.getElementById("gauge-vrms-chk");
-            if (check.checked) {
-                if (maxWidth700.matches) {
-                    element.style.display='block';
-                } else {
-                    element.style.display='flex';
-                }
-            }
-            else {
-                element.style.display='none';
-            }
-        }
-        function hideGauge() {
-            element.style.display='none';
-        }
-        
-    </script>
+    <script src="./apps/howler.min.js"></script>
+    <script src="./apps/gauge.min.js"></script>
+    <script type="module" src="./apps/app.js"></script>
+    <script src="./apps/SectionBoxes.js"></script>
+    <script type="module" src="./apps/OptionsGauges.js"></script>
+    
     <script src="./apps/papaparse.min.js"></script>
     <script src="./apps/session_out.js"></script>
 </body>

@@ -68,7 +68,7 @@ void setup() {
   delay(10);
   Serial.println();
 
-  WiFi.softAP(ssid_AP, password_AP, 1, hidden); //Inicializa la conexión WiFi - Access Point- (AP)
+  WiFi.softAP(ssid_AP, password_AP, 1); //Inicializa la conexión WiFi - Access Point- (AP)
   IPAddress myIP = WiFi.softAPIP(); //Asigna a la variable myIP la dirección IP del AP
   Serial.print("IP del access point: "); //Envía al Monitor Serie el texto
   Serial.println(myIP); //Envía al Monitor Serie el la dirección IP del AP
@@ -132,9 +132,9 @@ void setup() {
     request->send(LittleFS, "/fonts/icomoon.ttf");
   });
 
-  // Route to load security-alarm-siren.wav file
-  server.on("/apps/emergency-alarm.wav", HTTP_GET, [](AsyncWebServerRequest * request) {
-    request->send(LittleFS, "/apps/emergency-alarm.wav");
+  // Route to load alarm.wav file
+  server.on("/media/alarm.wav", HTTP_GET, [](AsyncWebServerRequest * request) {
+    request->send(LittleFS, "/media/alarm.wav");
   });
 
   // Route to load app.js file
@@ -142,15 +142,19 @@ void setup() {
     request->send(LittleFS, "/apps/app.js", "text/javascript");
   });
 
+  // Route to load SectionBoxes.js file
+  server.on("/apps/SectionBoxes.js", HTTP_GET, [](AsyncWebServerRequest * request) {
+    request->send(LittleFS, "/apps/SectionBoxes.js", "text/javascript");
+  });
 
-  // Route to load options_gauges.js file
-  server.on("/apps/options_gauges.js", HTTP_GET, [](AsyncWebServerRequest * request) {
-    request->send(LittleFS, "/apps/options_gauges.js", "text/javascript");
+  // Route to load OptionsGauges.js file
+  server.on("/apps/OptionsGauges.js", HTTP_GET, [](AsyncWebServerRequest * request) {
+    request->send(LittleFS, "/apps/OptionsGauges.js", "text/javascript");
   });
 
   // Route to load gauge.min.js file
-  server.on("/apps/gauge.js", HTTP_GET, [](AsyncWebServerRequest * request) {
-    request->send(LittleFS, "/apps/gauge.js", "text/javascript");
+  server.on("/apps/gauge.min.js", HTTP_GET, [](AsyncWebServerRequest * request) {
+    request->send(LittleFS, "/apps/gauge.min.js", "text/javascript");
   });
 
   // Route to load session_out.js file
@@ -163,9 +167,9 @@ void setup() {
     request->send(LittleFS, "/apps/papaparse.min.js", "text/javascript");
   });
 
-  // Route to load howler.js file
-  server.on("/apps/howler.js", HTTP_GET, [](AsyncWebServerRequest * request) {
-    request->send(LittleFS, "/apps/howler.js", "text/javascript");
+  // Route to load howler.min.js file
+  server.on("/apps/howler.min.js", HTTP_GET, [](AsyncWebServerRequest * request) {
+    request->send(LittleFS, "/apps/howler.min.js", "text/javascript");
   });
 
   server.begin();

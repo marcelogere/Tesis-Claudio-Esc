@@ -1,12 +1,16 @@
 var info = [];
 var info2 = [];
-var labels = {};
 var newData = [];
-var minVal = [];
-var maxVal = [];
 
-var fecha_separada;
-var hora_separada;
+var dataLabels = ["Fecha", "Hora", "VRms", "IRms", "KW", "Factor de Potencia", "Energia", "Energía Total"];
+
+var labels = {
+  "fields": ["Fecha", "Hora", "VRms-R", "VRms-S", "VRms-T", "IRms-R", "IRms-S", "IRms-T", "KW-R", "KW-S", "KW-T", "Factor-Pot-R", "Factor-Pot-S", "Factor-Pot-T", "Energia-R", "Energia-S", "Energia-T", "Energ-Total"],
+  "data": info
+  };
+
+var fecha;
+var hora;
 var vrms_r;
 var vrms_s;
 var vrms_t;
@@ -16,15 +20,164 @@ var irms_t;
 var prms_r;
 var prms_s;
 var prms_t;
+var fp_r;
+var fp_s;
+var fp_t;
 var energ_r;
 var energ_s;
 var energ_t;
 var energ_total;
-var fp_r;
-var fp_s;
-var fp_t;
 
 var flag = 0;
+
+var minLab;
+var maxLab;
+var maxVal;
+var minVal;
+
+var d;
+
+export {vrms_r, vrms_s, vrms_t, irms_r, irms_s, irms_t, prms_r, prms_s, prms_t, fp_r, fp_s, fp_t, energ_r, energ_s, energ_t, energ_total}
+
+/* ---------- Creación de la estructura html de #data_section ---------- */
+const dataSection = document.querySelector("#data_section");
+for (let i = 2; i < dataLabels.length; i++) {
+  const row = document.createElement('div');
+  row.classList.add('row');
+  if (i === dataLabels.length-1) {
+    for (let j = 0; j < 2; j++) {
+      const col = document.createElement('div');
+      const box = document.createElement('div');
+      if (j === 0) {
+        col.classList.add('col-xs-3');
+        box.classList.add('box', 'text-left');
+        box.textContent = dataLabels[i];
+      } else {
+        col.classList.add('col-xs-9');
+        box.classList.add('box2');
+        box.setAttribute('id', dataLabels[i]);
+      }
+      col.appendChild(box);
+      row.appendChild(col);
+    }
+  } else {
+    for (let j = 0; j < 4; j++) {
+      const col = document.createElement('div');
+      col.classList.add('col-xs-3');
+      const box = document.createElement('div');
+      if (j === 0) {
+        box.classList.add('box', 'text-left');
+        box.textContent = dataLabels[i];
+      } else {
+        box.classList.add('box2');
+        box.setAttribute('id', dataLabels[i] + '-' + (j === 1 ? 'R' : j === 2 ? 'S' : 'T'));
+      }
+      col.appendChild(box);
+      row.appendChild(col);
+    }
+  }
+  dataSection.appendChild(row);
+}
+
+/* ---------- Creación de la estructura html de #stat-section ---------- */
+const statSection = document.querySelector("#stat-section");
+for (let i = 2; i < dataLabels.length; i++) {
+  var elementStatSection = document.createElement("section");
+  elementStatSection.setAttribute('id', dataLabels[i] + '-stat-section');
+  elementStatSection.classList.add('element-stat-section');
+  if (i === dataLabels.length-1) {
+    const row = document.createElement('div');
+    row.classList.add('row');
+    for (let j = 0; j < 3; j++) {
+      const col = document.createElement('div');
+      col.classList.add('col-xs-4');
+      const box = document.createElement('div');
+      if (j === 0) {
+        box.classList.add('box', 'text-left');
+        box.textContent = dataLabels[i];
+      } else {
+        box.classList.add('box2');
+        box.setAttribute('id', dataLabels[i] + '-' + (j === 1 ? 'Min' : 'Max'));
+      }
+      col.appendChild(box);
+      row.appendChild(col);
+      elementStatSection.appendChild(row);
+    }
+    statSection.appendChild(elementStatSection);
+  } else {
+    const row = document.createElement('div');
+    row.classList.add('row');
+    for (let k = 0; k < 3; k++) {
+      for (let j = 0; j < 3; j++) {
+        const col = document.createElement('div');
+        col.classList.add('col-xs-4');
+        const box = document.createElement('div');
+        if (j === 0) {
+          box.classList.add('box', 'text-left');
+          box.textContent = dataLabels[i] + (k === 0 ? '-R' : k === 1 ? '-S' : '-T');
+        } else {
+          box.classList.add('box2');
+          box.setAttribute('id', dataLabels[i] + (k === 0 ? '-R' : k === 1 ? '-S' : '-T') + '-' + (j === 1 ? 'Min' : 'Max'));
+        }
+        col.appendChild(box);
+        row.appendChild(col);
+        elementStatSection.appendChild(row);
+      }
+    }
+    statSection.appendChild(elementStatSection);
+  }
+    statSection.appendChild(elementStatSection);
+}
+/* ---------- Creación de la estructura html de #gauge_section ---------- */
+// Obtener el contenedor principal
+const gaugeSection = document.getElementById("gauge-section");
+
+// Recorrer los elementos de dataLabels a partir del tercer elemento
+for (let i = 2; i < dataLabels.length; i++) {
+  
+  var elementGaugeSection = document.createElement("section");
+  elementGaugeSection.setAttribute('id', dataLabels[i] + '-gauge-section');
+  elementGaugeSection.classList.add('element-gauge-section');
+  if (i === dataLabels.length-1) {
+    var gaugeDiv = document.createElement("div");
+    var valueH1 = dataLabels[i];
+    gaugeDiv.classList.add('gauges-div');
+    var gaugeH1 = document.createElement("h1");
+    var previewDiv = document.createElement("div");
+    var canvasGauge = document.createElement("canvas");
+    gaugeDiv.setAttribute('id', dataLabels[i] + '-gauge');
+    gaugeH1.setAttribute('id', dataLabels[i] + '-h1');
+    gaugeH1.textContent = valueH1;
+    previewDiv.setAttribute('id', dataLabels[i] + '-preview');
+    previewDiv.classList.add('prev-val');
+    canvasGauge.setAttribute('id', dataLabels[i] + '-canvas');
+    gaugeDiv.appendChild(gaugeH1);
+    gaugeDiv.appendChild(previewDiv);
+    gaugeDiv.appendChild(canvasGauge);
+    elementGaugeSection.appendChild(gaugeDiv);
+    gaugeSection.appendChild(elementGaugeSection);
+  } else {
+    for (let j = 0; j < 3; j++) {
+      var gaugeDiv = document.createElement("div");
+      var valueH1 = dataLabels[i] + (j === 0 ? '-R' : j === 1 ? '-S' : '-T')
+      gaugeDiv.classList.add('gauges-div');
+      var gaugeH1 = document.createElement("h1");
+      var previewDiv = document.createElement("div");
+      var canvasGauge = document.createElement("canvas");
+      gaugeDiv.setAttribute('id', dataLabels[i] + (j === 0 ? '-R' : j === 1 ? '-S' : '-T') + '-gauge');
+      gaugeH1.setAttribute('id', dataLabels[i] + (j === 0 ? '-R' : j === 1 ? '-S' : '-T') + '-h1');
+      gaugeH1.textContent = valueH1;
+      previewDiv.setAttribute('id', dataLabels[i] + (j === 0 ? '-R' : j === 1 ? '-S' : '-T') + '-preview');
+      previewDiv.classList.add('prev-val');
+      canvasGauge.setAttribute('id', dataLabels[i] + (j === 0 ? '-R' : j === 1 ? '-S' : '-T') + '-canvas');
+      gaugeDiv.appendChild(gaugeH1);
+      gaugeDiv.appendChild(previewDiv);
+      gaugeDiv.appendChild(canvasGauge);
+      elementGaugeSection.appendChild(gaugeDiv);
+    }
+    gaugeSection.appendChild(elementGaugeSection);
+  }
+}
 
 
 /* ---------- Funcion para la creacion y descarga del archivo .csv ---------- */
@@ -46,15 +199,15 @@ var download = function (info2) {
   a.setAttribute('href', url)
 
   // Creation of date variables
-  Year = d.getFullYear()    
-  Month = ("0" + (d.getMonth() + 1)).slice(-2)
-  date = ("0" + d.getDate()).slice(-2)
-  hours = ((d.getHours()<10?'0':'') + d.getHours())
-  minutes = ((d.getMinutes()<10?'0':'') + d.getMinutes())
-  seconds = ((d.getSeconds()<10?'0':'') + d.getSeconds())
+  var Year = d.getFullYear()    
+  var Month = ("0" + (d.getMonth() + 1)).slice(-2)
+  var date = ("0" + d.getDate()).slice(-2)
+  var hours = ((d.getHours()<10?'0':'') + d.getHours())
+  var minutes = ((d.getMinutes()<10?'0':'') + d.getMinutes())
+  var seconds = ((d.getSeconds()<10?'0':'') + d.getSeconds())
 
   // Generating the name of the .csv file
-  nombreArchivo = "Tesis_Claudio_Gereniere_"+ date + "_" + Month + "_" + Year + "_" + hours + "hs" + "-" + minutes + "m" + "-" + seconds + "s" +".csv"
+  var nombreArchivo = "Tesis_Claudio_Gereniere_"+ date + "_" + Month + "_" + Year + "_" + hours + "hs" + "-" + minutes + "m" + "-" + seconds + "s" +".csv"
 
   // Setting the anchor tag attribute for downloading
   // and passing the download file name
@@ -75,7 +228,7 @@ downloadButton.addEventListener("click", async function() {
   }
 });
 
-socket = new WebSocket("ws:/" + "/" + location.host + ":81");
+var socket = new WebSocket("ws:/" + "/" + location.host + ":81");
 
 socket.onopen = function(e) { console.log("[socket] socket.onopen ");
 
@@ -86,13 +239,15 @@ socket.onerror = function(e) { console.log("[socket] socket.onerror "); };
 
 /* ---------- Evento al momento de recibir datos de la terminal de arduino ---------- */
 socket.onmessage = function(e) {
-  console.log("[socket] " + e.data);
+  
+  var data = "18012317520122142240223066006590665014581476148214586000147616001482950044177100110120130";
+  console.log("[socket] " + data);
   
   /* ---------- Agrega los caracteres especiales ("/", ":" y ","),
   al string recibido por la terminal arduino ---------- */
-  agregarCaracter = (cadena, caracter, pasos) => {
+  var agregarCaracter = (cadena, caracter, pasos) => {
     let cadenaConCaracteres = "";
-      longitudCadena = cadena.length;
+    var  longitudCadena = cadena.length;
     for (let i = 0; i < longitudCadena; i += pasos) {
       if (i + pasos < longitudCadena) {
         cadenaConCaracteres += cadena.substring(i, i + pasos) + caracter;
@@ -103,124 +258,104 @@ socket.onmessage = function(e) {
     return cadenaConCaracteres;
   }
   
-  fecha_separada = agregarCaracter((e.data.slice(0, 6)), "/", 2);;
-  hora_separada = agregarCaracter((e.data.slice(6, 12)), ":", 2);
-  vrms_r = agregarCaracter((e.data.slice(12, 16)), ".", 3);
-  vrms_s = agregarCaracter((e.data.slice(16, 20)), ".", 3);
-  vrms_t = agregarCaracter((e.data.slice(20, 24)), ".", 3);
-  irms_r = agregarCaracter((e.data.slice(24, 28)), ".", 3);
-  irms_s = agregarCaracter((e.data.slice(28, 32)), ".", 3);
-  irms_t = agregarCaracter((e.data.slice(32, 36)), ".", 3);
-  prms_r = agregarCaracter((e.data.slice(36, 40)), ".", 3);
-  prms_s = agregarCaracter((e.data.slice(40, 44)), ".", 3);
-  prms_t = agregarCaracter((e.data.slice(44, 48)), ".", 3);
-  energ_r = agregarCaracter((e.data.slice(48, 56)), ".", 5);
-  energ_s = agregarCaracter((e.data.slice(56, 64)), ".", 5);
-  energ_t = agregarCaracter((e.data.slice(64, 72)), ".", 5);
-  energ_total = agregarCaracter((e.data.slice(72, 80)), ".", 5);
-  fp_r = agregarCaracter((e.data.slice(80, 83)), ".", 3);
-  fp_s = agregarCaracter((e.data.slice(83, 86)), ".", 3);
-  fp_t = agregarCaracter((e.data.slice(86, 89)), ".", 3);
+  fecha = agregarCaracter((data.slice(0, 6)), "/", 2);;
+  hora = agregarCaracter((data.slice(6, 12)), ":", 2);
+  vrms_r = agregarCaracter((data.slice(12, 16)), ".", 3);
+  vrms_s = agregarCaracter((data.slice(16, 20)), ".", 3);
+  vrms_t = agregarCaracter((data.slice(20, 24)), ".", 3);
+  irms_r = agregarCaracter((data.slice(24, 28)), ".", 3);
+  irms_s = agregarCaracter((data.slice(28, 32)), ".", 3);
+  irms_t = agregarCaracter((data.slice(32, 36)), ".", 3);
+  prms_r = agregarCaracter((data.slice(36, 40)), ".", 3);
+  prms_s = agregarCaracter((data.slice(40, 44)), ".", 3);
+  prms_t = agregarCaracter((data.slice(44, 48)), ".", 3);
+  fp_r = agregarCaracter((data.slice(48, 51)), ".", 3);
+  fp_s = agregarCaracter((data.slice(51, 54)), ".", 3);
+  fp_t = agregarCaracter((data.slice(54, 57)), ".", 3);
+  energ_r = agregarCaracter((data.slice(57, 65)), ".", 5);
+  energ_s = agregarCaracter((data.slice(65, 73)), ".", 5);
+  energ_t = agregarCaracter((data.slice(73, 81)), ".", 5);
+  energ_total = agregarCaracter((data.slice(81, 89)), ".", 5);
 
-  newData = [fecha_separada, hora_separada, vrms_r, vrms_s, vrms_t, irms_r, irms_s, irms_t, prms_r, prms_s, prms_t, energ_r, energ_s, energ_t, energ_total, fp_r, fp_s, fp_t];
+  newData = [fecha, hora, vrms_r, vrms_s, vrms_t, irms_r, irms_s, irms_t, prms_r, prms_s, prms_t, fp_r, fp_s, fp_t, energ_r, energ_s, energ_t, energ_total];
   info.unshift(newData);
-
-  labels = {
-    "fields": ["Fecha", "Hora", "VRms-R", "VRms-S", "VRms-T", "IRms-R", "IRms-S", "IRms-T", "KW-R", "KW-S", "KW-T", "Energia-R", "Energia-S", "Energia-T", "Energ-Total", "Factor-Pot-R", "Factor-Pot-S", "Factor-Pot-T"],
-    "data": info
-  };
-  /* ---------- Cambia el "." por "," ---------- */
-  var vrms_rC = vrms_r.replace('.', ',');
-  var vrms_sC = vrms_s.replace('.', ',');
-  var vrms_tC = vrms_t.replace('.', ',');
-  var irms_rC = irms_r.replace('.', ',');
-  var irms_sC = irms_s.replace('.', ',');
-  var irms_tC = irms_t.replace('.', ',');
-  var prms_rC = prms_r.replace('.', ',');
-  var prms_sC = prms_s.replace('.', ',');
-  var prms_tC = prms_t.replace('.', ',');
-  var energ_rC = energ_r.replace('.', ',');
-  var energ_sC = energ_s.replace('.', ',');
-  var energ_tC = energ_t.replace('.', ',');
-  var energ_totalC = energ_total.replace('.', ',');
-  var fp_rC = fp_r.replace('.', ',');
-  var fp_sC = fp_s.replace('.', ',');
-  var fp_tC = fp_t.replace('.', ',');
-
-  /* ---------- Inserta el valor de las variables en el html de index.html ---------- */
-
-  document.getElementById("Fecha").innerHTML = fecha_separada;
-  document.getElementById("Hora").innerHTML = hora_separada;
-  document.getElementById("VRms_R").innerHTML = vrms_rC;
-  document.getElementById("VRms_S").innerHTML = vrms_sC;
-  document.getElementById("VRms_T").innerHTML = vrms_tC;
-  document.getElementById("IRms_R").innerHTML = irms_rC;
-  document.getElementById("IRms_S").innerHTML = irms_sC;
-  document.getElementById("IRms_T").innerHTML = irms_tC;
-  document.getElementById("PRms_R").innerHTML = prms_rC;
-  document.getElementById("PRms_S").innerHTML = prms_sC;
-  document.getElementById("PRms_T").innerHTML = prms_tC;
-  document.getElementById("Energia_R").innerHTML = energ_rC;
-  document.getElementById("Energia_S").innerHTML = energ_sC;
-  document.getElementById("Energia_T").innerHTML = energ_tC;
-  document.getElementById("Energia_Total").innerHTML = energ_totalC;
-  document.getElementById("FP_R").innerHTML = fp_rC;
-  document.getElementById("FP_S").innerHTML = fp_sC;
-  document.getElementById("FP_T").innerHTML = fp_tC;
-
-  /* ---------- Se asignan los Min y Max, y se insertan en index.html en la grilla Estadisticas---------- */
-  var ultimaFila = info[info.length - 1];
-  const statSection = document.querySelector("#statistics-section");
-
-  for (let i = 2; i < labels.fields.length; i++) {
-    const row = document.createElement('div');
-    row.classList.add('row');
-    for (let j = 0; j < 3; j++) {
-      const col = document.createElement('div');
-      col.classList.add('col-xs-4');
-      const box = document.createElement('div');
-      if (j === 0) {
-        box.classList.add('box', 'text-left');
-        box.textContent = labels.fields[i];
+ 
+  
+  /* ---------- Inserción de los valores de las variables en el html de #data-section---------- */
+  var p=2;
+    for (let i = 2; i < dataLabels.length; i++) {
+      if (i === dataLabels.length-1) {
+        for (let j = 1; j < 4; j++) {
+          document.getElementById(dataLabels[i]).innerHTML = newData[p];
+        }
       } else {
-        box.classList.add('box2');
-        box.setAttribute('id', labels.fields[i] + '-' + (j === 1 ? 'Min' : 'Max'));
-       
+        for (let j = 1; j < 4; j++) {
+          document.getElementById(dataLabels[i] + '-' + (j === 1 ? 'R' : j === 2 ? 'S' : 'T')).innerHTML = newData[p];
+          p++;
+        }
       }
-      col.appendChild(box);
-      row.appendChild(col);
     }
-    statSection.appendChild(row);
-  }
+  
+  document.getElementById("Fecha").innerHTML = fecha;
+  document.getElementById("Hora").innerHTML = hora;
 
+  /* ---------- Se asignan los Min y Max, y se insertan en el html de #stat-section---------- */
+  var datoUltimaFila = info[info.length - 1];
+  var ultimaFila = newData.length-1;
+  var l=2;
   if (flag==0) {
-    for (let i = 2; i < newData.length; i++) {
-      minLab = labels.fields[i] + '-Min';
-      maxLab = labels.fields[i] + '-Max';
-      document.getElementById(minLab).innerHTML = newData[i];
-      document.getElementById(maxLab).innerHTML = newData[i];
+    for (let i = 2; i < dataLabels.length; i++) {
+      if (i === dataLabels.length-1) {
+        minLab = dataLabels[i] + '-Min';
+        maxLab = dataLabels[i] + '-Max';
+        document.getElementById(minLab).innerHTML = newData[ultimaFila];
+        document.getElementById(maxLab).innerHTML = newData[ultimaFila];
+      } else{
+        for (let j = 0; j < 3; j++) {
+          for (let m = 0; m < 2; m++) {
+            document.getElementById(dataLabels[i] + '-' + (j === 0 ? 'R' : j === 1 ? 'S' : 'T') + '-' + (m === 0 ? 'Min' : 'Max')).innerHTML = newData[l];          
+          }
+          l++
+        }
+      }
     }
     flag = 1;
   } else {
-    for (let i = 2; i < newData.length; i++) {
-      minLab = labels.fields[i] + '-Min';
-      maxLab = labels.fields[i] + '-Max';
-      if (newData[i]<ultimaFila[i]) {
-        minVal = newData[i];
-        maxVal = ultimaFila[i];
-      }
-      if (newData[i]>ultimaFila[i]) {
-        maxVal = newData[i];
-        minVal = ultimaFila[i];
-      }
-      document.getElementById(minLab).innerHTML = minVal;
-      document.getElementById(maxLab).innerHTML = maxVal;  
+    for (let i = 2; i < dataLabels.length; i++) {
+      if (i === dataLabels.length-1) {
+        minLab = dataLabels[i] + '-Min';
+        maxLab = dataLabels[i] + '-Max';
+        if (newData[ultimaFila]<datoUltimaFila[ultimaFila]) {
+          minVal = newData[ultimaFila];
+          maxVal = datoUltimaFila[ultimaFila];
+        }
+        if (newData[ultimaFila]>datoUltimaFila[ultimaFila]) {
+          maxVal = newData[ultimaFila];
+          minVal = datoUltimaFila[ultimaFila];
+        }
+        document.getElementById(minLab).innerHTML = minVal;
+        document.getElementById(maxLab).innerHTML = maxVal;
+      }else{
+        for (let j = 0; j < 3; j++) {
+          minLab = dataLabels[i] + '-' + (j === 0 ? 'R' : j === 1 ? 'S' : 'T') + '-Min';
+          maxLab = dataLabels[i] + '-' + (j === 0 ? 'R' : j === 1 ? 'S' : 'T') + '-Max';
+
+          if (newData[l]<datoUltimaFila[l]) {
+            minVal = newData[l];
+            maxVal = datoUltimaFila[l];
+          }
+          if (newData[l]>datoUltimaFila[l]) {
+            maxVal = newData[l];
+            minVal = datoUltimaFila[l];
+          }
+          document.getElementById(dataLabels[i] + '-' + (j === 0 ? 'R' : j === 1 ? 'S' : 'T') + '-Min').innerHTML = minVal;
+          document.getElementById(dataLabels[i] + '-' + (j === 0 ? 'R' : j === 1 ? 'S' : 'T') + '-Max').innerHTML = maxVal;          
+          l++
+        }
+      }  
     }
   }
 
-  /* ---------- Alarmas ---------- */
-
-  
   /* ---------- Configuracion de la libreria Papaparse 
   ( Para el formato e insercion de datos del archivo .csv) ---------- */
 

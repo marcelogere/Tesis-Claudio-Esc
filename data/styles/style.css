@@ -146,13 +146,21 @@ code {
 
 /*------------------------------ index.html ------------------------------*/
 /*------------------------------ Gauges ------------------------------*/
-#gauge-section{
+.element-gauge-section{
   justify-content: space-around;
 }
 
-#section-boxes{
+.section-boxes{
   display: flex;
   justify-content: center;
+}
+
+.titles h3{
+  color: #000;
+}
+
+.check-boxes h3{
+  color: #000;
 }
 
 .gauges-div{
@@ -162,7 +170,7 @@ code {
   padding-left: var(--half-gutter-width, 0.5rem);
   flex-basis: 25%;
   max-width: 25%;
-  background-color: #ffffff;
+  background-color: #d9dee3;
   border-radius: var(--border-r);
   padding: 1rem;
   text-align: center;
@@ -219,6 +227,7 @@ code {
 }
 
 .text-left{
+  text-align: left;
   display: flex;
   justify-content: left;
 }
@@ -360,7 +369,6 @@ code {
   border: 1px solid #ffffff;
   background-clip: padding-box; 
   overflow: hidden;
-  text-align: center;
   color: white;
   padding: 0.7rem;
 }
@@ -381,9 +389,11 @@ code {
   text-align: center;
   color: rgb(55, 53, 53);
   padding: 0.7rem;
+  word-wrap: break-word;
 }
 
 .row:first-child{
+  text-align: center;
   border-top-left-radius: var(--border-r);
 }
 
@@ -520,10 +530,6 @@ code {
     font-size: 16px;
   }
 
-  #gauge-section{
-    text-align: center;
-  }
-
   .gauges-div{
     box-sizing: border-box;
     flex: 0 0 auto;
@@ -532,14 +538,13 @@ code {
     padding-right: var(--half-gutter-width, 0.5rem);
     padding-left: var(--half-gutter-width, 0.5rem);
     flex-basis: 80%;
-    max-width: 80%;
-    background-color: #ffffff;
+    max-width: 100%;
     border-radius: var(--border-r);
     padding: 1rem;
     text-align: center;
   }
 
-  #section-boxes{
+  .section-boxes{
     display: block;
   }
 
@@ -571,6 +576,10 @@ code {
   .hero-copy {
     font-size: 1.25rem;
     margin-bottom: 2rem;
+  }
+
+  .box{
+    word-wrap: break-word;
   }
   .box-row,
   .box-first,
