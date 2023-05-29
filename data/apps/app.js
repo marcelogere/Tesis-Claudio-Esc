@@ -228,19 +228,19 @@ downloadButton.addEventListener("click", async function() {
   }
 });
 
-var socket = new WebSocket("ws:/" + "/" + location.host + ":81");
+//var socket = new WebSocket("ws:/" + "/" + location.host + ":81");
 
-socket.onopen = function(e) { console.log("[socket] socket.onopen ");
+//socket.onopen = function(e) { console.log("[socket] socket.onopen ");
 
-};
+//};
 
-socket.onerror = function(e) { console.log("[socket] socket.onerror "); };
+//socket.onerror = function(e) { console.log("[socket] socket.onerror "); };
 
 
 /* ---------- Evento al momento de recibir datos de la terminal de arduino ---------- */
-socket.onmessage = function(e) {
+//socket.onmessage = function(e) {
   
-  var data = "18012317520122142240223066006590665014581476148214586000147616001482950044177100110120130";
+  var data = "18052314532022052201220866036601660514581440146213012813314761482145860001476160014829500";
   console.log("[socket] " + data);
   
   /* ---------- Agrega los caracteres especiales ("/", ":" y ","),
@@ -375,4 +375,4 @@ socket.onmessage = function(e) {
       newline: "\r\n",
     });
   }
-}
+//}

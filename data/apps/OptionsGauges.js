@@ -2,6 +2,23 @@
 import { vrms_r, vrms_s, vrms_t, irms_r, irms_s, irms_t, prms_r, prms_s, prms_t, fp_r, fp_s, fp_t, energ_r, energ_s, energ_t, energ_total
 } from "./app.js";
 
+/* ------------------------------- Limit Values for the alarm ------------------------------- */
+var vrmsLimit = 230;
+var irmsLimit = 800;
+var kwLimit = 147;
+var fpLimit = 130;
+var energLimit = 14600;
+
+/* ------------------------------- Sound Options ------------------------------- */
+var sound = new Howl({
+    src: ['./media/alarm.wav'],
+    loop: true,
+    volume: 0.1,
+    onend: function() {
+      console.log('Finished!');
+    }
+  });
+
 /* ------------------------------- VRms Options ------------------------------- */
 
 var VRms_opts = {
@@ -70,6 +87,9 @@ vrms_rGaugeObject.set(0);
 document.getElementById('VRms-R').addEventListener("DOMSubtreeModified", fVrms_r, true);
 function fVrms_r(){
     vrms_rGaugeObject.set(vrms_r);
+    if (vrms_r>vrmsLimit) {
+        sound.play();
+    } 
 }
 vrms_rGaugeObject.animationSpeed = 30;
     
@@ -83,6 +103,9 @@ vrms_sGaugeObject.set(0);
 document.getElementById('VRms-S').addEventListener("DOMSubtreeModified", fVrms_s, true);
 function fVrms_s(){
     vrms_sGaugeObject.set(vrms_s);
+    if (vrms_s>vrmsLimit) {
+        sound.play();
+    } 
 }
 vrms_sGaugeObject.animationSpeed = 30;
 
@@ -96,6 +119,9 @@ vrms_tGaugeObject.set(0);
 document.getElementById('VRms-T').addEventListener("DOMSubtreeModified", fvrms_t, true);
 function fvrms_t(){
     vrms_tGaugeObject.set(vrms_t);
+    if (vrms_t>vrmsLimit) {
+        sound.play();
+    } 
 }
 vrms_tGaugeObject.animationSpeed = 30;
 
@@ -168,6 +194,9 @@ irms_rGaugeObject.set(0);
 document.getElementById('IRms-R').addEventListener("DOMSubtreeModified", firms_r, true);
 function firms_r(){
     irms_rGaugeObject.set(irms_r);
+    if (irms_r>irmsLimit) {
+        sound.play();
+    }
 }
 irms_rGaugeObject.animationSpeed = 30;
 
@@ -181,6 +210,9 @@ irms_sGaugeObject.set(0);
 document.getElementById('IRms-S').addEventListener("DOMSubtreeModified", firms_s, true);
 function firms_s(){
     irms_sGaugeObject.set(irms_s);
+    if (irms_s>irmsLimit) {
+        sound.play();
+    }
 }
 irms_sGaugeObject.animationSpeed = 30;
 
@@ -194,5 +226,8 @@ irms_tGaugeObject.set(0);
 document.getElementById('IRms-T').addEventListener("DOMSubtreeModified", firms_t, true);
 function firms_t(){
     irms_tGaugeObject.set(irms_t);
+    if (irms_t>irmsLimit) {
+        sound.play();
+    }
 }
 irms_tGaugeObject.animationSpeed = 30;
