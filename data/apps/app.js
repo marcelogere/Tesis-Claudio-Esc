@@ -228,20 +228,18 @@ downloadButton.addEventListener("click", async function() {
   }
 });
 
-//var socket = new WebSocket("ws:/" + "/" + location.host + ":81");
+var socket = new WebSocket("ws:/" + "/" + location.host + ":81");
 
-//socket.onopen = function(e) { console.log("[socket] socket.onopen ");
+socket.onopen = function(e) { console.log("[socket] socket.onopen ");
 
-//};
+};
 
-//socket.onerror = function(e) { console.log("[socket] socket.onerror "); };
+socket.onerror = function(e) { console.log("[socket] socket.onerror "); };
 
 
 /* ---------- Evento al momento de recibir datos de la terminal de arduino ---------- */
-//socket.onmessage = function(e) {
-  
-  var data = "18052314532022052201220866036601660514581440146213012813314761482145860001476160014829500";
-  console.log("[socket] " + data);
+socket.onmessage = function(e) {
+  console.log("[socket] " + e.data);
   
   /* ---------- Agrega los caracteres especiales ("/", ":" y ","),
   al string recibido por la terminal arduino ---------- */
@@ -258,24 +256,24 @@ downloadButton.addEventListener("click", async function() {
     return cadenaConCaracteres;
   }
   
-  fecha = agregarCaracter((data.slice(0, 6)), "/", 2);;
-  hora = agregarCaracter((data.slice(6, 12)), ":", 2);
-  vrms_r = agregarCaracter((data.slice(12, 16)), ".", 3);
-  vrms_s = agregarCaracter((data.slice(16, 20)), ".", 3);
-  vrms_t = agregarCaracter((data.slice(20, 24)), ".", 3);
-  irms_r = agregarCaracter((data.slice(24, 28)), ".", 3);
-  irms_s = agregarCaracter((data.slice(28, 32)), ".", 3);
-  irms_t = agregarCaracter((data.slice(32, 36)), ".", 3);
-  prms_r = agregarCaracter((data.slice(36, 40)), ".", 3);
-  prms_s = agregarCaracter((data.slice(40, 44)), ".", 3);
-  prms_t = agregarCaracter((data.slice(44, 48)), ".", 3);
-  fp_r = agregarCaracter((data.slice(48, 51)), ".", 3);
-  fp_s = agregarCaracter((data.slice(51, 54)), ".", 3);
-  fp_t = agregarCaracter((data.slice(54, 57)), ".", 3);
-  energ_r = agregarCaracter((data.slice(57, 65)), ".", 5);
-  energ_s = agregarCaracter((data.slice(65, 73)), ".", 5);
-  energ_t = agregarCaracter((data.slice(73, 81)), ".", 5);
-  energ_total = agregarCaracter((data.slice(81, 89)), ".", 5);
+  fecha = agregarCaracter((e.data.slice(0, 6)), "/", 2);;
+  hora = agregarCaracter((e.data.slice(6, 12)), ":", 2);
+  vrms_r = agregarCaracter((e.data.slice(12, 16)), ".", 3);
+  vrms_s = agregarCaracter((e.data.slice(16, 20)), ".", 3);
+  vrms_t = agregarCaracter((e.data.slice(20, 24)), ".", 3);
+  irms_r = agregarCaracter((e.data.slice(24, 28)), ".", 3);
+  irms_s = agregarCaracter((e.data.slice(28, 32)), ".", 3);
+  irms_t = agregarCaracter((e.data.slice(32, 36)), ".", 3);
+  prms_r = agregarCaracter((e.data.slice(36, 40)), ".", 3);
+  prms_s = agregarCaracter((e.data.slice(40, 44)), ".", 3);
+  prms_t = agregarCaracter((e.data.slice(44, 48)), ".", 3);
+  fp_r = agregarCaracter((e.data.slice(48, 51)), ".", 3);
+  fp_s = agregarCaracter((e.data.slice(51, 54)), ".", 3);
+  fp_t = agregarCaracter((e.data.slice(54, 57)), ".", 3);
+  energ_r = agregarCaracter((e.data.slice(57, 65)), ".", 5);
+  energ_s = agregarCaracter((e.data.slice(65, 73)), ".", 5);
+  energ_t = agregarCaracter((e.data.slice(73, 81)), ".", 5);
+  energ_total = agregarCaracter((e.data.slice(81, 89)), ".", 5);
 
   newData = [fecha, hora, vrms_r, vrms_s, vrms_t, irms_r, irms_s, irms_t, prms_r, prms_s, prms_t, fp_r, fp_s, fp_t, energ_r, energ_s, energ_t, energ_total];
   info.unshift(newData);
@@ -375,4 +373,4 @@ downloadButton.addEventListener("click", async function() {
       newline: "\r\n",
     });
   }
-//}
+}
