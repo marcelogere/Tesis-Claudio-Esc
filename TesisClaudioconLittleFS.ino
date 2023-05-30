@@ -137,6 +137,11 @@ void setup() {
     request->send(LittleFS, "/media/alarm.wav");
   });
 
+  // Route to load gauge-icon.png file
+  server.on("/media/gauge-icon.png", HTTP_GET, [](AsyncWebServerRequest * request) {
+    request->send(LittleFS, "/media/gauge-icon.png");
+  });
+
   // Route to load app.js file
   server.on("/apps/app.js", HTTP_GET, [](AsyncWebServerRequest * request) {
     request->send(LittleFS, "/apps/app.js", "text/javascript");

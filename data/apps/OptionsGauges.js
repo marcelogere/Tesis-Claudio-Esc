@@ -89,6 +89,17 @@ function fVrms_r(){
     vrms_rGaugeObject.set(vrms_r);
     if (vrms_r>vrmsLimit) {
         sound.play();
+        window.setInterval (BlinkIt, 500);
+        var colorFondo = "red";
+        var colorFuente = "white";
+      
+        function BlinkIt () {
+          var blink = document.getElementById ("VRms-R");
+          colorFondo = (colorFondo == "#d9dee3")? "red" : "#d9dee3";
+          blink.style.backgroundColor = colorFondo;
+          colorFuente = (colorFuente == "#000000")? "white" : "#000000";
+          blink.style.color= colorFuente;
+        }
     } 
 }
 vrms_rGaugeObject.animationSpeed = 30;
@@ -105,6 +116,17 @@ function fVrms_s(){
     vrms_sGaugeObject.set(vrms_s);
     if (vrms_s>vrmsLimit) {
         sound.play();
+        window.setInterval (BlinkIt, 500);
+        var colorFondo = "red";
+        var colorFuente = "white";
+      
+        function BlinkIt () {
+          var blink = document.getElementById ("VRms-S");
+          colorFondo = (colorFondo == "#d9dee3")? "red" : "#d9dee3";
+          blink.style.backgroundColor = colorFondo;
+          colorFuente = (colorFuente == "#000000")? "white" : "#000000";
+          blink.style.color= colorFuente;
+        }
     } 
 }
 vrms_sGaugeObject.animationSpeed = 30;
@@ -121,6 +143,17 @@ function fvrms_t(){
     vrms_tGaugeObject.set(vrms_t);
     if (vrms_t>vrmsLimit) {
         sound.play();
+        window.setInterval (BlinkIt, 500);
+        var colorFondo = "red";
+        var colorFuente = "white";
+      
+        function BlinkIt () {
+          var blink = document.getElementById ("VRms-T");
+          colorFondo = (colorFondo == "#d9dee3")? "red" : "#d9dee3";
+          blink.style.backgroundColor = colorFondo;
+          colorFuente = (colorFuente == "#000000")? "white" : "#000000";
+          blink.style.color= colorFuente;
+        }
     } 
 }
 vrms_tGaugeObject.animationSpeed = 30;
@@ -196,6 +229,17 @@ function firms_r(){
     irms_rGaugeObject.set(irms_r);
     if (irms_r>irmsLimit) {
         sound.play();
+        window.setInterval (BlinkIt, 500);
+        var colorFondo = "red";
+        var colorFuente = "white";
+      
+        function BlinkIt () {
+          var blink = document.getElementById ("IRms-R");
+          colorFondo = (colorFondo == "#d9dee3")? "red" : "#d9dee3";
+          blink.style.backgroundColor = colorFondo;
+          colorFuente = (colorFuente == "#000000")? "white" : "#000000";
+          blink.style.color= colorFuente;
+        }
     }
 }
 irms_rGaugeObject.animationSpeed = 30;
@@ -212,6 +256,17 @@ function firms_s(){
     irms_sGaugeObject.set(irms_s);
     if (irms_s>irmsLimit) {
         sound.play();
+        window.setInterval (BlinkIt, 500);
+        var colorFondo = "red";
+        var colorFuente = "white";
+      
+        function BlinkIt () {
+          var blink = document.getElementById ("IRms-S");
+          colorFondo = (colorFondo == "#d9dee3")? "red" : "#d9dee3";
+          blink.style.backgroundColor = colorFondo;
+          colorFuente = (colorFuente == "#000000")? "white" : "#000000";
+          blink.style.color= colorFuente;
+        }
     }
 }
 irms_sGaugeObject.animationSpeed = 30;
@@ -228,6 +283,17 @@ function firms_t(){
     irms_tGaugeObject.set(irms_t);
     if (irms_t>irmsLimit) {
         sound.play();
+        window.setInterval (BlinkIt, 500);
+        var colorFondo = "red";
+        var colorFuente = "white";
+      
+        function BlinkIt () {
+          var blink = document.getElementById ("IRms-T");
+          colorFondo = (colorFondo == "#d9dee3")? "red" : "#d9dee3";
+          blink.style.backgroundColor = colorFondo;
+          colorFuente = (colorFuente == "#000000")? "white" : "#000000";
+          blink.style.color= colorFuente;
+        }
     }
 }
 irms_tGaugeObject.animationSpeed = 30;
