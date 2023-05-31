@@ -13,7 +13,7 @@ var energLimit = 14600;
 var sound = new Howl({
     src: ['./media/alarm.wav'],
     loop: true,
-    volume: 0.1,
+    volume: 0.5,
     onend: function() {
       console.log('Finished!');
     }
@@ -100,7 +100,12 @@ function fVrms_r(){
           colorFuente = (colorFuente == "#000000")? "white" : "#000000";
           blink.style.color= colorFuente;
         }
-    } 
+
+    } else{
+      sound.pause();
+      blink.style.backgroundColor = "#d9dee3";
+      blink.style.color= "#000000";
+    }
 }
 vrms_rGaugeObject.animationSpeed = 30;
     

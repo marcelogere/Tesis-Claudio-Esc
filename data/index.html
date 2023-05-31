@@ -11,6 +11,13 @@
     <title>Tesis Claudio Gereniere</title>
 </head>
 <body onload="hideSections();">
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Ventana creada para obtener una acción del usuario y asi cumplir la exigencia de Google Chrome para poder reproducir las alarmas. Gracias!</p>
+            <button id="closeModal">Cerrar</button>
+        </div>
+    </div>
     <div class="titles">
         <h1>Tesis Claudio Gereniere</h1>
     </div>
@@ -158,5 +165,26 @@
     
     <script src="./apps/papaparse.min.js"></script>
     <script src="./apps/session_out.js"></script>
+    <script>
+        window.addEventListener('load', function() {
+            var modal = document.getElementById('myModal');
+            var closeButton = document.getElementById('closeModal');
+
+            // Mostrar la ventana modal al cargar la página
+            modal.style.display = 'block';
+
+            // Cerrar la ventana modal cuando se hace clic en el botón "Cerrar"
+            closeButton.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            // Cerrar la ventana modal cuando se hace clic fuera de ella
+            window.addEventListener('click', function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

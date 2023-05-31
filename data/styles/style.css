@@ -104,6 +104,57 @@ code {
   color: #007FFF;
 }
 
+/* Estilos para la ventana modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  color: #747272;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 50%;
+}
+
+.modal-content p{
+  position: relative;
+  top: 50px;
+  margin: 20px;
+}
+
+#closeModal{
+  position: absolute;
+  top: 290px;
+  right: 20px;
+  float: right;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 /*------------------------------ mainmenu.html ------------------------------*/
 .container {
   padding: 0 1rem;
@@ -563,6 +614,20 @@ code {
     font-size: 0.6rem;
   }
   
+  .modal-content p{
+    position: relative;
+    top: 50px;
+    text-align: justify;
+    margin: 15px;
+  }
+
+  #closeModal{
+    position: absolute;
+    top: 330px;
+    right: 20px;
+    float: right;
+  }
+
   .slide-menu {
     width: 25%;
   }
