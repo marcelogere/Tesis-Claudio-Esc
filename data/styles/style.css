@@ -614,6 +614,12 @@ code {
     font-size: 0.6rem;
   }
   
+  .modal-content {
+    margin: 5% auto;
+    padding: 10px;
+    height: 70%;
+  }
+
   .modal-content p{
     position: relative;
     top: 50px;

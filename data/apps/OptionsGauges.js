@@ -19,9 +19,6 @@ var sound = new Howl({
     src: ['./media/alarm.wav'],
     loop: true,
     volume: 0.5,
-    onend: function() {
-      console.log('Finished!');
-    }
   });
 
 /* ------------------------------- VRms Options ------------------------------- */
